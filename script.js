@@ -11,11 +11,9 @@ function imageToggeler() {
     if (id == 5) {
         id = 1;
       }
-    id = id % 5;
     console.log(imgName + id + ".jpg");
     image.src = imgName + id + ".jpg";
-    // count.textContent = String(id + 1).padStart(2,0);
-    // console.log(String(id + 1).padStart(2,0));
+    count.textContent = id;
     id++;
   }
   function decrement() {
