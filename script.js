@@ -1,58 +1,48 @@
-class ImageToggler {
-    constructor(imgName, imageElement, upArrowElement, downArrowElement, countElement, filterElement) {
-      this.imgName = imgName;
-      this.image = imageElement;
-      this.upArrow = upArrowElement;
-      this.downArrow = downArrowElement;
-      this.count = countElement;
-      this.filter = filterElement;
-  
-      this.id = 0;
-  
-      this.initialize();
-    }
-  
-    initialize() {
-      this.upArrow.addEventListener("click", () => this.updateImage(1));
-      this.downArrow.addEventListener("click", () => this.updateImage(-1));
-  
-      this.filter.addEventListener("click", (e) => {
-        e.stopPropagation();
-        if (e.target && e.target.className !== "filters" && e.target.matches('div')) {
-          document.querySelector(".bold").classList.remove("bold");
-          e.target.className = "bold";
+let imgName = "./assets/Toggle";
+let image =  document.querySelector(".hero_img");
+let upArrow = document.querySelector("#upArrow")
+let downArrow = document.querySelector("#downArrow")
+let count = document.querySelector(".count1");
+let filter = document.querySelector(".filters");
+
+function imageToggeler(){
+    let id = 0;
+     function increment(){
+        id = ++id%5; 
+        console.log(imgName + id + ".jpg");
+        image.src = imgName + id + ".jpg";
+        count.textContent = String(id + 1).padStart(2,0);
+        console.log(String(id + 1).padStart(2,0));
+    }    
+     function decrement(){
+        if(id<=0){
+            id = 4;
         }
-      });
+        id--;
+        image.src = imgName + id +".jpg";
+        count.textContent = String(id + 1).padStart(2,0);
+    }   
+    return {increment,decrement}; 
+}
+
+const {increment,decrement} = imageToggeler();
+
+upArrow.addEventListener("click",increment);
+downArrow.addEventListener("click",decrement);
+
+filter.addEventListener("click",(e)=>{
+    e.stopPropagation();
+    if ( e.target && e.target.className!=="filters" && e.target.matches('div')) {
+        document.querySelector(".bold").classList.remove("bold");
+        e.target.className = "bold";
     }
+})
+
+let ham_btn = document.querySelector(".fa-bars-staggered");
+let ham_active = document.querySelector(".hamburger");
+ham_btn.addEventListener("click",()=>{
+ham_active.classList.toggle("hamburger_active");
+})
+
+
   
-    updateImage(step) {
-      this.id = (this.id + step + 6) % 6;
-      this.image.src = `${this.imgName}${this.id}.jpg`;
-      this.count.textContent = String(this.id + 1).padStart(2, 0);
-    }
-  }
-  
-  const imageConfig = {
-    imgName: "./assets/HomeDecor",
-    imageElement: document.querySelector(".hero_img"),
-    upArrowElement: document.querySelector("#upArrow"),
-    downArrowElement: document.querySelector("#downArrow"),
-    countElement: document.querySelector(".count1"),
-    filterElement: document.querySelector(".filters"),
-  };
-  
-  const imageToggler = new ImageToggler(
-    imageConfig.imgName,
-    imageConfig.imageElement,
-    imageConfig.upArrowElement,
-    imageConfig.downArrowElement,
-    imageConfig.countElement,
-    imageConfig.filterElement
-  );
-  
-  const hamBtn = document.querySelector(".fa-bars-staggered");
-  const hamActive = document.querySelector(".hamburger");
-  
-  hamBtn.addEventListener("click", () => {
-    hamActive.classList.toggle("hamburger_active");
-  });
