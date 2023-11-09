@@ -17,12 +17,13 @@ function imageToggeler() {
     id++;
   }
   function decrement() {
-    if (id <= 0) {
-      id = 4;
+    if (id <= 1) {
+      id = 5;
     }
     id--;
     image.src = imgName + id + ".jpg";
-    count.textContent = String(id + 1).padStart(2, 0);
+    count.textContent = id;
+   
   }
   return { increment, decrement };
 }
