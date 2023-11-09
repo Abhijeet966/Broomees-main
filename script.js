@@ -9,8 +9,8 @@ function imageToggeler() {
   let id = 1;
   function increment() {
     if (id == 5) {
-        id = 1;
-      }
+      id = 1;
+    }
     console.log(imgName + id + ".jpg");
     image.src = imgName + id + ".jpg";
     count.textContent = id;
@@ -23,7 +23,6 @@ function imageToggeler() {
     id--;
     image.src = imgName + id + ".jpg";
     count.textContent = id;
-   
   }
   return { increment, decrement };
 }
