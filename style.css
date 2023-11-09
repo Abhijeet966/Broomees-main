@@ -460,8 +460,13 @@ body {
 
 .product_img {
   position: absolute;
+  transition: transform .2s;
   bottom: -50px;
   height: 400px;
+}
+.product_img:hover{
+  transform: scale(0.5);
+  
 }
 
 .client {
@@ -506,7 +511,6 @@ body {
   padding: 11px;
   height: fit-content;
   position: absolute;
-  /* transform: translate(351px, 32px); */
   right: -60px;
 }
 .happy-client1 h1 {
